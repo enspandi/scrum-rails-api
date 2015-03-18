@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318093314) do
+ActiveRecord::Schema.define(version: 20150318095046) do
 
   create_table "backlog_items", force: :cascade do |t|
     t.string   "subject"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20150318093314) do
     t.integer  "status"
     t.integer  "sequence"
     t.integer  "sprint_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "created_by_id"
   end
 
+  add_index "backlog_items", ["created_by_id"], name: "index_backlog_items_on_created_by_id"
   add_index "backlog_items", ["sprint_id"], name: "index_backlog_items_on_sprint_id"
 
   create_table "members", force: :cascade do |t|
