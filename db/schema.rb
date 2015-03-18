@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318092029) do
+ActiveRecord::Schema.define(version: 20150318093314) do
+
+  create_table "backlog_items", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "content"
+    t.integer  "priority"
+    t.integer  "status"
+    t.integer  "sequence"
+    t.integer  "sprint_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "backlog_items", ["sprint_id"], name: "index_backlog_items_on_sprint_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
@@ -32,5 +45,14 @@ ActiveRecord::Schema.define(version: 20150318092029) do
 
   add_index "projects", ["product_owner_id"], name: "index_projects_on_product_owner_id"
   add_index "projects", ["scrum_master_id"], name: "index_projects_on_scrum_master_id"
+
+  create_table "sprints", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sprints", ["project_id"], name: "index_sprints_on_project_id"
 
 end
