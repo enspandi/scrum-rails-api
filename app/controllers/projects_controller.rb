@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     @projects = Project.all
+    #, include: ['scrum_master', 'product_owner']
     render json: @projects, include: ['scrum_master', 'product_owner']
   end
 
